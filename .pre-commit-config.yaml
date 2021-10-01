@@ -16,8 +16,10 @@ repos:
     rev: 2.1.5  # or specific git tag
     hooks:
       - id: shellcheck
-        # args:
-        #   - "-e"
-        #   - "SC1090"
+        args:
+          - "-e"
+          - "SC2035"
+        # - "-e"
+        # - "SC1090"
         #   - "-e"
         #   - "SC1091"
