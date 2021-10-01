@@ -4,7 +4,7 @@ on:
     types: [opened, edited, synchronize, reopened]
 jobs:
   pre-commit:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -14,7 +14,7 @@ jobs:
   tagging:
     name: "Tagging (dry-run)"
     needs: pre-commit
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     outputs:
       net_tag: ${{ steps.tag_version.outputs.new_tag }}
     steps:
