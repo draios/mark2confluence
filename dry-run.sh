@@ -8,9 +8,11 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
         pushd "${doc_dir}" 
         grep -R -l 'Space:' *.md | 
             while read -r md_file; do
+                source_link=${source_dir}/${md_file}
                 echo "==> Verify markdown file ${source_link}"
-                sed -e "s|SOURCE_LINK|${source_dir}/${md_file}|" header.md.tpl | cat - ${md_file} > /tmp/header_${md_file}
-                mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug --dry-run -f /tmp/header_${md_file} > /dev/null
+                sed -e "s|SOURCE_LINK|${source_link}|" header.md > /tmp/header.md
+                sed -e "/Title/r /tmp/header.md" ${md_file} > ${md_file}
+                mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug --dry-run -f ${md_file} > /dev/null
             done
         popd
     done
