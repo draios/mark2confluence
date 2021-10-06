@@ -12,7 +12,7 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
                 source_link=${source_dir}/${md_file}
                 echo "==> Verify markdown file ${source_link}"
                 sed -e "s|SOURCE_LINK|${source_link}|" header.md > /tmp/header.md
-                sed -e "/Title/r /tmp/header.md" ${md_file} > ${md_file}
+                sed -e "/Title/r /tmp/header.md" ${md_file} > /tmp/${md_file}
                 mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug --dry-run -f ${md_file} > /dev/null
             done
         popd
