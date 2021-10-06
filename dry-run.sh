@@ -4,7 +4,7 @@ set -eo pipefail
 find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
     while read -r doc_dir; do
 
-        source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${{ github.head_ref }}/${doc_dir:2}
+        source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${{ github.ref }}/${doc_dir:2}
         echo "==> Verify markdown files into ${source_dir}"
         pushd "${doc_dir}" 
         grep -R -l 'Space:' *.md | 
