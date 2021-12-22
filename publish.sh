@@ -7,7 +7,7 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
         pushd "${doc_dir}"
         count=$(find . -type f -name "*.md" | wc -l | tr -d ' ')
         if [[ "${count}" -gt 0 ]]; then
-            grep -R -l 'Space:' *.md | xargs -n1 -I{} mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug -f {} > /dev/null
+            grep -R -l 'Space:' $(find . -type f -name '*.md' -mmin -30) | xargs -n1 -I{} mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug -f {} > /dev/null
         else
             echo "==> No *.md file found, skipping directory"
         fi
