@@ -11,7 +11,7 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
             while read -r md_file; do
                 source_link=${source_dir}/${md_file}
                 echo "==> Verify markdown file ${source_link}"
-                sed -e "s|SOURCE_LINK|${source_link}|" header.md > /tmp/header.md
+                sed -e "s|SOURCE_LINK|${source_link}|" header.md.tpl > /tmp/header.md
                 sed -e "/Title/r /tmp/header.md" ${md_file} > /tmp/${md_file}
                 mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug --dry-run -f /tmp/${md_file} > /dev/null
             done
