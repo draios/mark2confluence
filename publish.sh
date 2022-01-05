@@ -11,10 +11,9 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
         pushd "${doc_dir}"
         grep -R -l 'Space:' *.md | 
             while read -r md_file; do
-                echo ${HEADER_TPL} > ${doc_dir}/header.md
-                ls ${doc_dir}
+                echo ${HEADER_TPL} > ./header.md
                 source_link=${source_dir}/${md_file}
-                echo "==> Verify markdown file ${source_dir}/${md_file} (${source_link})"
+                echo "==> Verify markdown file ${source_link}"
                 header=${HEADER_INCLUDE/SOURCE_LINK/$source_link}
                 awk -v f="$header" '/Title/{print; print f; next}1' ${md_file} > /tmp/${md_file}
                 cat /tmp/${md_file}
