@@ -16,9 +16,9 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
                 source_link=${source_dir}/${md_file}
                 echo "==> Verify markdown file ${source_link}"
                 header=${HEADER_INCLUDE/SOURCE_LINK/$source_link}
-                awk -v f="$header" '/Title/{print; print f; next}1' ${md_file} > ${md_file}
-                cat ${md_file}
-                mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug -f ${md_file} > /dev/null
+                awk -v f="$header" '/Title/{print; print f; next}1' ${md_file} > ${md_file}-header.md
+                cat ${md_file}-header.md
+                mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug -f ${md_file}-header.md > /dev/null
             done
         popd
     done
