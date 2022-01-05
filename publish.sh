@@ -15,7 +15,7 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
                 echo "==> Verify markdown file ${source_link}"
                 header=${HEADER_TPL/SOURCE_LINK/$source_link}
                 echo ${header}
-                sed -e "/Title/r ${header}" ${md_file} > /tmp/${md_file}
+                echo "${header}\n$(<${md_file})" > /tmp/${md_file}
                 cat /tmp/${md_file}
                 mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug -f /tmp/${md_file} > /dev/null
             done
