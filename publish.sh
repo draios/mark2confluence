@@ -1,8 +1,11 @@
 #!/bin/bash -l
 set -eo pipefail
 
+echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${github.ref}"
+
 find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
     while read -r doc_dir; do
+        echo "${doc_dir:2}"
         source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${{ github.ref }}/${doc_dir:2}
         echo "==> Upload markdown files into ${source_dir}"
         pushd "${doc_dir}"
