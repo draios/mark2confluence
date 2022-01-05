@@ -1,14 +1,14 @@
 #!/bin/bash -l
 set -eo pipefail
 
-echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF}"
-source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${{ github.ref }}
-echo "${soure_dir}"
+# echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF_NAME}"
+# source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${{ github.ref }}
+# echo "${soure_dir}"
 
 find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
     while read -r doc_dir; do
         echo "${doc_dir:2}"
-        source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF}/${doc_dir:2}
+        source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF_NAME}/${doc_dir:2}
         echo "==> Upload markdown files into ${source_dir}"
         pushd "${doc_dir}"
         #grep -R -l 'Space:' *.md | xargs -n1 -I{} mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug -f {} > /dev/null
