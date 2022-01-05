@@ -1,8 +1,9 @@
 #!/bin/bash -l
 set -eo pipefail
 
-HEADER_TPL="\n---\n\n**WARNING**: This page is automatically generated from [this source code]({{ .source_link}})\n\n---\n"
-HEADER_INCLUDE='<!-- Include: ./header.md source_link: "SOURCE_LINK" -->'
+HEADER_TPL="---\n\n**WARNING**: This page is automatically generated from [this source code]({{ .source_link}})\n\n---"
+HEADER_INCLUDE='<!-- Include: ./header.md 
+    source_link: "SOURCE_LINK" -->'
 
 find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
     while read -r doc_dir; do
