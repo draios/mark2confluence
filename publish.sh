@@ -1,8 +1,8 @@
 #!/bin/bash -l
 set -eo pipefail
 
-echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF}/${doc_dir:2}"
-source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${{ github.ref }}/${doc_dir:2}
+echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF}"
+source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${{ github.ref }}
 echo "${soure_dir}"
 
 find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
