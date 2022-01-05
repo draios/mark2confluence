@@ -1,7 +1,9 @@
 #!/bin/bash -l
 set -eo pipefail
 
-echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${github.ref}"
+echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+echo "/blob/${{github.ref}}"
+echo "/blob/${github.ref}"
 
 find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
     while read -r doc_dir; do
