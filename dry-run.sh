@@ -10,7 +10,7 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN:-*}" |
         pushd "${doc_dir}"
         count=$(find . -type f -name "*.md" | wc -l | tr -d ' ')
         if [[ "${count}" -gt 0 ]]; then
-            grep -R -l 'Space:' *.md | 
+            grep -R -l 'Space:' *.md |
                 while read -r md_file; do
                     source_link=${source_dir}/${md_file}
                     echo "==> Verify markdown file ${source_link}"
