@@ -3,7 +3,7 @@ set -eo pipefail
 
 HEADER_TPL="---\n\n**WARNING**: This page is automatically generated from [this source code](SOURCE_LINK)\n\n---\n"
 
-find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
+find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN:-*}" |
     while read -r doc_dir; do
         source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF_NAME}/${doc_dir:2}
         echo "==> Upload markdown files into ${source_dir}"

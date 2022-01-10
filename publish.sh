@@ -3,14 +3,14 @@ set -eo pipefail
 
 HEADER_TPL="---\n\n**WARNING**: This page is automatically generated from [this source code](SOURCE_LINK)\n\n---\n"
 
-find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN}" |
+find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN:-*}" |
     while read -r doc_dir; do
         source_dir=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/${GITHUB_REF_NAME}/${doc_dir:2}
         echo "==> Upload markdown files into ${source_dir}"
         pushd "${doc_dir}"
         count=$(find . -type f -name "*.md" | wc -l | tr -d ' ')
         if [[ "${count}" -gt 0 ]]; then
-            find . -type f -name '*.md' -mmin -30 -exec grep -l 'Space:' {} \; | 
+            find . -type f -name '*.md' -mmin -${MODIFIED_INTERVAL:-30} -exec grep -l 'Space:' {} \; | 
                 while read -r md_file; do
                     source_link=${source_dir}/${md_file}
                     echo "==> Verify markdown file ${source_link}"
