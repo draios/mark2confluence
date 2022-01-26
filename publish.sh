@@ -15,7 +15,8 @@ find . -type d -not -path '**/\.*' -path "./${DOC_DIR_PATTERN:-*}" |
             find . -type f -name '*.md' -mmin -${MODIFIED_INTERVAL:-30} -exec grep -l 'Space:' {} \; |
                 while read -r md_file; do
                     source_link=${source_dir}/${md_file}
-                    echo "==> Verify markdown file ${source_link}"
+                    echo "==> Adding source link ${source_link}"
+                    echo "==> Publishing File ${md_file}"
                     header=${HEADER_TPL/SOURCE_LINK/$source_link}
                     awk -v f="$header" '/Title/{print; print f; next}1' ${md_file} > /tmp/mark/${md_file}
                     mark -p "${CONFLUENCE_PASSWORD}" -u "${CONFLUENCE_USERNAME}" -b "${BASE_URL}" --debug -f /tmp/mark/${md_file} > /dev/null
