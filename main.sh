@@ -20,7 +20,7 @@ set -o pipefail
 set -x
 
 SCRIPT_DIR=$(dirname -- "$(readlink -f "${BASH_SOURCE[0]}" || realpath "${BASH_SOURCE[0]}")")
-MARK="5.7"
+MARK="6.7"
 
 export SCRIPT_DIR
 export MARK
@@ -30,7 +30,7 @@ main() {
     export
 
     curl -LO https://github.com/kovetskiy/mark/releases/download/${MARK}/mark_${MARK}_Linux_x86_64.tar.gz && \
-    tar -xvzf mark_5.7_Linux_x86_64.tar.gz && \
+    tar -xvzf mark_${MARK}_Linux_x86_64.tar.gz && \
     chmod +x mark && \
     sudo mv mark /usr/local/bin/mark
 
